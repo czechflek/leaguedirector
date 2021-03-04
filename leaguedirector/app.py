@@ -29,6 +29,57 @@ class SkyboxCombo(QComboBox):
             self.addItem(os.path.basename(path), path)
         QComboBox.showPopup(self)
 
+class GeneratorWindow(VBoxWidget):
+    def __init__(self, api):
+        VBoxWidget.__init__(self)
+        self.api = api
+
+        # self.codec = QComboBox()
+        # self.codec.addItem('webm')
+        # self.codec.addItem('png')
+        # self.startTime = FloatInput(0, 100)
+        # self.endTime = FloatInput(0, 100)
+        # self.fps = FloatInput(0, 400)
+        # self.fps.setValue(60)
+        # self.lossless = BooleanInput()
+
+        # self.outputButton = QPushButton()
+        # self.outputButton.setToolTip('Change Output Directory')
+        # self.outputButton.setFixedWidth(30)
+        # self.outputButton.setIcon(self.style().standardIcon(QStyle.SP_FileDialogStart))
+        # self.outputButton.clicked.connect(self.selectOutputDirectory)
+
+        # self.button = QPushButton('Record')
+        # self.button.clicked.connect(self.startRecording)
+        # self.button2 = QPushButton('Record Sequence')
+        # self.button2.clicked.connect(self.recordSequence)
+        # self.list = QListWidget()
+        # self.list.setSortingEnabled(True)
+        # self.list.itemDoubleClicked.connect(self.openRecording)
+
+        # self.form = QWidget(self)
+        # self.formLayout = QFormLayout(self.form)
+        # self.formLayout.addRow('Codec', self.codec)
+        # self.formLayout.addRow('Start Time', self.startTime)
+        # self.formLayout.addRow('End Time', self.endTime)
+        # self.formLayout.addRow('Frames Per Second', self.fps)
+        # self.formLayout.addRow('Lossless Encoding', self.lossless)
+        # self.formLayout.addRow('Output Directory', HBoxWidget(self.outputButton, self.outputLabel))
+        # self.formLayout.addRow(HBoxWidget(self.button, self.button2))
+        # self.formLayout.addRow(self.list)
+        # self.form.setLayout(self.formLayout)
+
+        # self.addWidget(self.form)
+        self.setWindowTitle('Generator')
+
+    def update(self):
+        print("test update")
+    #     self.startTime.setRange(0, self.api.playback.length)
+    #     self.endTime.setRange(0, self.api.playback.length)
+    #     self.render.setVisible(self.api.recording.recording)
+    #     self.form.setVisible(not self.api.recording.recording)
+
+
 
 class KeybindingsWindow(QScrollArea):
     def __init__(self, bindings):
@@ -899,6 +950,7 @@ class LeagueDirector(object):
         self.addWindow(VisibleWindow(self.api), 'visible')
         self.addWindow(TimelineWindow(self.api), 'timeline')
         self.addWindow(RecordingWindow(self.api), 'recording')
+        self.addWindow(GeneratorWindow(self.api), 'generator')
         self.addWindow(KeybindingsWindow(self.bindings), 'bindings')
         self.addWindow(ConnectWindow(), 'connect')
         self.addWindow(UpdateWindow(), 'update')
